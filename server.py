@@ -33,9 +33,10 @@ tkDisplay.config(yscrollcommand=scrollBar.set, background="#F4F6F7", highlightba
 clientFrame.pack(side=tk.BOTTOM, pady=(5, 10))
 
 
-server = None
-HOST_ADDR = "0.0.0.0"
-HOST_PORT = 8080
+SERVER = socket.gethostbyname(socket.gethostname())
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+PORT = 8080
+ADDR = (SERVER, PORT)
 client_name = " "
 clients = []
 clients_names = []
@@ -43,7 +44,7 @@ clients_names = []
 
 # Start server function
 def start_server():
-    global server, HOST_ADDR, HOST_PORT # code is fine without this
+    global server, ADDR, PORT # code is fine without this
     btnStart.config(state=tk.DISABLED)
     btnStop.config(state=tk.NORMAL)
 
@@ -51,13 +52,13 @@ def start_server():
     print(socket.AF_INET)
     print(socket.SOCK_STREAM)
 
-    server.bind((HOST_ADDR, HOST_PORT))
+    server.bind((ADDR))
     server.listen(5)  # server is listening for client connection
 
     threading._start_new_thread(accept_clients, (server, " "))
 
-    lblHost["text"] = "Host: " + HOST_ADDR
-    lblPort["text"] = "Port: " + str(HOST_PORT)
+    lblHost["text"] = "IP: " + SERVER
+    lblPort["text"] = "Port: " + str(PORT)
 
 
 # Stop server function
