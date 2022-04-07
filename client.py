@@ -1,11 +1,36 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import Entry, messagebox
 import socket, threading
+
+
 
 window = tk.Tk()
 window.title("Client")
 username = " "
+
+SERVER = socket.gethostbyname(socket.gethostname())  #forgot to keep it with the others but dosent interfere with the program
+
+def bob():                          # to add ip of ur choice
+    l = miu.get()
+    global SERVER, PORT, ADDR
+    SERVER = l
+    print(SERVER)
+    PORT = 8080
+    ADDR = (SERVER, PORT)
+    
+secframe = tk.Frame(window)
+pq = tk.Label(secframe, text=f'[{socket.gethostbyname(socket.gethostname())}]').pack(side=tk.LEFT)
+sensei = tk.Label(secframe, text = "IP:").pack(side=tk.LEFT)
+miu = tk.Entry(secframe)
+miu.pack(side=tk.LEFT)
+tnConnect = tk.Button(secframe, text="Change", command=bob)
+tnConnect.pack(side=tk.LEFT)
+secframe.pack(side=tk.TOP)
+
+
 topFrame = tk.Frame(window)
+
+
 lblName = tk.Label(topFrame, text = "Name:").pack(side=tk.LEFT)
 entName = tk.Entry(topFrame)
 entName.pack(side=tk.LEFT)
@@ -37,14 +62,19 @@ def connect():
         connect_to_server(username)
 
 # network client
-client = None
-HOST_ADDR = "0.0.0.0"
-HOST_PORT = 8080
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#SERVER = input('SERVER:')
+#SERVER = siu
+#SERVER = socket.gethostbyname(socket.gethostname())
+
+PORT = 8080
+ADDR = (SERVER, PORT)
+
 def connect_to_server(name):
-    global client, HOST_PORT, HOST_ADDR
+    global client, PORT, ADDR
     try:
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client.connect((HOST_ADDR, HOST_PORT))
+        client.connect(ADDR)
         client.send(name.encode()) # Send name to server after connecting
         entName.config(state=tk.DISABLED)
         btnConnect.config(state=tk.DISABLED)
@@ -53,7 +83,7 @@ def connect_to_server(name):
         # do not block the main thread :)
         threading._start_new_thread(receive_message_from_server, (client, "m"))
     except Exception as e:
-        tk.messagebox.showerror(title="ERROR!!!", message="Cannot connect to host: " + HOST_ADDR + " on port: " + str(HOST_PORT) + " Server may be Unavailable. Try again later")
+        tk.messagebox.showerror(title="ERROR!!!", message="Cannot connect to host: " + SERVER + " on port: " + str(PORT) + " Server may be Unavailable. Try again later")
 def receive_message_from_server(sck, m):
     while True:
         from_server = sck.recv(4096).decode()
