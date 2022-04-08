@@ -1,4 +1,6 @@
-# Simple Game Chat App
+# Campsite
+
+## Simple Game Chat App
 ## Works on Linux/Windows
 1) Clone or download this repository
 2) Go to terminal and go to the folder where saved
