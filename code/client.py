@@ -1,6 +1,6 @@
 from operator import ne
 import tkinter as tk
-from tkinter import N, NE, NW, SW, Entry, messagebox
+from tkinter import CENTER, N, NE, NSEW, NW, SW, Entry, messagebox
 import socket, threading
 
 
@@ -33,30 +33,32 @@ def bob():
 
 logse = tk.PhotoImage(file='resources/client.png')
 fof = tk.Label(image=logse)
-fof.pack(pady=(10,5), side=tk.TOP, anchor=NE, padx=5)
+fof.pack(pady=(10,5), side=tk.TOP, anchor=N, padx=5)
     
 secframe = tk.Frame(window)
+kzz= len(f'[{SERVER}] IP:')
+pzz = kzz + 5
 pq = tk.Label(secframe, text=f'[{SERVER}]').pack(side=tk.LEFT)
 sensei = tk.Label(secframe, text = "IP:").pack(side=tk.LEFT)
 miu = tk.Entry(secframe)
 miu.pack(side=tk.LEFT)
 tnConnect = tk.Button(secframe, text="Change", command=bob)
 tnConnect.pack(side=tk.LEFT)
-secframe.pack(side=tk.TOP, anchor=NE, padx=5)
+secframe.pack(side=tk.TOP, anchor=N, padx=5)
 
 
 topFrame = tk.Frame(window)
 
 
-lblName = tk.Label(topFrame, text = "Name:").pack(side=tk.LEFT)
+lblName = tk.Label(topFrame, text = pzz*' '+"Name:").pack(side=tk.LEFT)
 entName = tk.Entry(topFrame)
 entName.pack(side=tk.LEFT)
 btnConnect = tk.Button(topFrame, text="Connect", command=lambda : connect())
 btnConnect.pack(side=tk.LEFT)
-topFrame.pack(side=tk.TOP, anchor=NE, padx=5)
+topFrame.pack(side=tk.TOP, anchor=N, padx=5)
 
 displayFrame = tk.Frame(window)
-lblLine = tk.Label(displayFrame, text="*********************************************************************").pack()
+lblLine = tk.Label(displayFrame, text="************************************************************").pack()
 scrollBar = tk.Scrollbar(displayFrame)
 scrollBar.pack(side=tk.RIGHT, fill=tk.Y)
 tkDisplay = tk.Text(displayFrame, height=20, width=55)
@@ -66,11 +68,13 @@ scrollBar.config(command=tkDisplay.yview)
 tkDisplay.config(yscrollcommand=scrollBar.set, background="#F4F6F7", highlightbackground="grey", state="disabled")
 displayFrame.pack(side=tk.TOP)
 bottomFrame = tk.Frame(window)
-tkMessage = tk.Text(bottomFrame, height=2, width=55)
+
+blLine = tk.Label(bottomFrame, text="************************************************************").pack()
+tkMessage = tk.Text(bottomFrame, height=2, width=58)
 tkMessage.pack(side=tk.LEFT, padx=(5, 0), pady=(5, 10))
 tkMessage.config(highlightbackground="grey", state="disabled")
 tkMessage.bind("<Return>", (lambda event: getChatMessage(tkMessage.get("1.0", tk.END))))
-bottomFrame.pack(side=tk.BOTTOM, anchor=SW)
+bottomFrame.pack(side=tk.BOTTOM, anchor=CENTER)
 def connect():
     global username, client
     if len(entName.get()) < 1:
