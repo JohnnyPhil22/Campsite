@@ -6,13 +6,13 @@ from turtle import color
 
 # commands to exec files within directory
 def go_client():
-    cmd = 'python3 Game-Chat-App-main/client.py'
+    cmd = 'python3 client.py'
     p= subprocess.Popen(cmd, shell=True)
 def go_serv_win():
-    cmd = 'python3 Game-Chat-App-main/server.py'
+    cmd = 'python3 server.py'
     p= subprocess.Popen(cmd, shell=True)
 def go_server():
-    cmd = 'python3 Game-Chat-App-main/server_lin.py'
+    cmd = 'python3 server_lin.py'
     p= subprocess.Popen(cmd, shell=True)
 
 
