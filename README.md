@@ -6,8 +6,8 @@
 1) Clone or download this repository
 2) Go to Terminal and go to the folder where saved
 3) To start:
-    a) Ubuntu: python3 app.py
-    b) Manjaro: app python3 app.py
+<p>    a) Ubuntu: python3 app.py </p>
+<p>    b) Manjaro: app python3 app.py </p>
 ### Windows
 1) Clone or download this repository
 2) Go to Command Prompt and go to folder where saved
