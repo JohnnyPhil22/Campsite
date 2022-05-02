@@ -1,7 +1,6 @@
 import tkinter as tk
 import socket, threading
 
-
 window = tk.Tk()
 window.title("Server")
 
@@ -49,8 +48,6 @@ scrollBar.config(command=tkDisplay.yview)
 tkDisplay.config(yscrollcommand=scrollBar.set, background="#F4F6F7", highlightbackground="grey", state="disabled")
 clientFrame.pack(side=tk.BOTTOM, pady=(5, 10))
 
-
-
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #SERVER = socket.gethostbyname(socket.gethostname())
 PORT = 8080
@@ -58,7 +55,6 @@ ADDR = (SERVER, PORT)
 client_name = " "
 clients = []
 clients_names = []
-
 
 # Start server function
 def start_server():
@@ -78,29 +74,24 @@ def start_server():
     lblHost["text"] = "IP: " + SERVER
     lblPort["text"] = "Port: " + str(PORT)
 
-
 # Stop server function
 def stop_server():
     global server
     btnStart.config(state=tk.NORMAL)
     btnStop.config(state=tk.DISABLED)
 
-
 def accept_clients(the_server, y):
     while True:
         client, addr = the_server.accept()
         clients.append(client)
-
         # use a thread so as not to clog the gui thread
         threading._start_new_thread(send_receive_client_message, (client, addr))
-
 
 # Function to receive message from current client AND
 # Send that message to other clients
 def send_receive_client_message(client_connection, client_ip_addr):
     global server, client_name, clients, clients_addr
     client_msg = " "
-
     # send welcome message to client
     client_name  = client_connection.recv(4096).decode()
     welcome_msg = "Welcome " + client_name + ". Use 'exit' to quit"
@@ -109,7 +100,6 @@ def send_receive_client_message(client_connection, client_ip_addr):
     clients_names.append(client_name)
 
     update_client_names_display(clients_names)  # update client names display
-
 
     while True:
         data = client_connection.recv(4096).decode()
@@ -136,7 +126,6 @@ def send_receive_client_message(client_connection, client_ip_addr):
 
     update_client_names_display(clients_names)  # update client names display
 
-
 # Return the index of the current client in the list of clients
 def get_client_index(client_list, curr_client):
     idx = 0
@@ -146,7 +135,6 @@ def get_client_index(client_list, curr_client):
         idx = idx + 1
 
     return idx
-
 
 # Update client name display when a new client connects OR
 # When a connected client disconnects

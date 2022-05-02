@@ -1,14 +1,10 @@
-from operator import ne
 import tkinter as tk
-from tkinter import CENTER, N, NE, NSEW, NW, SW, Entry, messagebox
+from tkinter import CENTER, N
 import socket, threading
-
-
 
 window = tk.Tk()
 window.title("Client")
 username = " "
-
 
 def extract_ip():
     st = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -46,9 +42,7 @@ tnConnect = tk.Button(secframe, text="Change", command=bob)
 tnConnect.pack(side=tk.LEFT)
 secframe.pack(side=tk.TOP, anchor=N, padx=5)
 
-
 topFrame = tk.Frame(window)
-
 
 lblName = tk.Label(topFrame, text = pzz*' '+"Name:").pack(side=tk.LEFT)
 entName = tk.Entry(topFrame)
