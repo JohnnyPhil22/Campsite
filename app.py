@@ -11,7 +11,7 @@ def go_serv_win():
 
 x = tk.Tk()
 x.title('Chat App')
-#x.iconbitmap('logo.ico')
+x.iconbitmap('logo.ico')
 
 #logo
 logox = tk.PhotoImage(file='resources/logo.png')
