@@ -13,7 +13,8 @@ def go_server():
     p= subprocess.Popen(cmd, shell=True)
 
 x = tk.Tk()
-x.title('Chat App')
+x.title('Project Campsite - Home Page')
+x.iconbitmap('resources/icon.ico')
 
 logox = tk.PhotoImage(file='resources/logo.png')
 

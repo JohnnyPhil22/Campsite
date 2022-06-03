@@ -3,6 +3,7 @@ import socket, threading
 
 window = tk.Tk()
 window.title("Server")
+window.iconbitmap('resources/icon.ico')
 
 #ip for linux
 def extract_ip():

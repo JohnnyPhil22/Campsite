@@ -5,6 +5,7 @@ import socket, threading
 window = tk.Tk()
 window.title("Client")
 username = " "
+window.iconbitmap('resources/icon.ico')
 
 def extract_ip():
     st = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
