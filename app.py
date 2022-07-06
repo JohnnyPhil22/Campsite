@@ -3,11 +3,9 @@ import subprocess
 
 # commands to exec files within directory
 def go_client():
-    cmd = 'python3 code/client.py'
-    p= subprocess.Popen(cmd, shell=True)
+    p=subprocess.Popen('python3 code/client.py', shell=True)
 def go_serv_win():
-    cmd = 'python3 code/server.py'
-    p= subprocess.Popen(cmd, shell=True)
+    p=subprocess.Popen('python3 code/server.py', shell=True)
 
 x = tk.Tk()
 x.title('Chat App')
