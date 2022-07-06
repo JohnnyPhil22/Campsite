@@ -4,20 +4,7 @@ import socket, threading
 window = tk.Tk()
 window.title("Server")
 window.iconbitmap('resources/icon.ico')
-
-#ip for linux
-def extract_ip():
-    st = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:       
-        st.connect(('10.255.255.255', 1))
-        IP = st.getsockname()[0]
-    except Exception:
-        IP = '127.0.0.1'
-    finally:
-        st.close()
-    return IP
-SERVER = extract_ip()
-
+SERVER = socket.gethostbyname(socket.gethostname())
 # Top frame consisting of two buttons widgets (i.e. btnStart, btnStop)
 logse = tk.PhotoImage(file='resources/server.png')
 fof = tk.Label(image=logse)
@@ -50,7 +37,6 @@ tkDisplay.config(yscrollcommand=scrollBar.set, background="#F4F6F7", highlightba
 clientFrame.pack(side=tk.BOTTOM, pady=(5, 10))
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#SERVER = socket.gethostbyname(socket.gethostname())
 PORT = 8080
 ADDR = (SERVER, PORT)
 client_name = " "
