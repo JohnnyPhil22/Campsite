@@ -5,6 +5,7 @@ window = tk.Tk()
 window.title("Server")
 window.iconbitmap('resources/icon.ico')
 SERVER = socket.gethostbyname(socket.gethostname())
+
 # Top frame consisting of two buttons widgets (i.e. btnStart, btnStop)
 logse = tk.PhotoImage(file='resources/server.png')
 fof = tk.Label(image=logse)
