@@ -1,5 +1,6 @@
 import tkinter as tk
-import socket, threading
+import socket, threading, csv
+from datetime import datetime
 
 window = tk.Tk()
 window.title("Server")
@@ -44,6 +45,9 @@ client_name = " "
 clients = []
 clients_names = []
 
+with open('../logfile.csv','a') as logfile:
+    csv.writer().write('Server started at',datetime.now().strftime('%d/%/%Y %H:%M:%S'))
+
 # Start server function
 def start_server():
     global server, ADDR, PORT # code is fine without this
@@ -61,12 +65,16 @@ def start_server():
 
     lblHost["text"] = "IP: " + SERVER
     lblPort["text"] = "Port: " + str(PORT)
+    with open('logfile.csv','a') as logfile:
+        csv.writer(logfile).write('Server started at',datetime.now().strftime('%d/%/%Y %H:%M:%S'))
 
 # Stop server function
 def stop_server():
     global server
     btnStart.config(state=tk.NORMAL)
     btnStop.config(state=tk.DISABLED)
+    with open('logfile.csv','a') as logfile:
+        csv.writer(logfile).write('Server stopped at',datetime.now().strftime('%d/%/%Y %H:%M:%S'))
 
 def accept_clients(the_server, y):
     while True:
