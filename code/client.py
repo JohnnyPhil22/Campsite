@@ -1,27 +1,20 @@
+import imp
 import tkinter as tk
 from tkinter import CENTER, N
 import socket, threading
+from tkinter import messagebox
+import encryption
+
 
 window = tk.Tk()
 window.title("Client")
 username = " "
 window.iconbitmap('resources/icon.ico')
-
-def extract_ip():
-    st = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:       
-        st.connect(('10.255.255.255', 1))
-        IP = st.getsockname()[0]
-    except Exception:
-        IP = '127.0.0.1'
-    finally:
-        st.close()
-    return IP
-SERVER = extract_ip()
-#SERVER = socket.gethostbyname(socket.gethostname())
+SERVER = socket.gethostbyname(socket.gethostname())
 
 def bob():
     l = miu.get()
+    l = encryption.decrypt(str(l))
     global SERVER, PORT, ADDR
     SERVER = l
     print(SERVER)
