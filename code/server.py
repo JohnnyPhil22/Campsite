@@ -1,12 +1,7 @@
 import tkinter as tk
-<<<<<<< HEAD
 import socket, threading, csv
 import encryption
 from datetime import datetime
-=======
-import socket, threading
-import encryption
->>>>>>> 6774eac2a7466bf2ef4069ffd09e56d630682ed5
 
 window = tk.Tk()
 window.title("Server")
