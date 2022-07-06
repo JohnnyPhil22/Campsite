@@ -1,10 +1,15 @@
 import tkinter as tk
 import socket, threading
+import encryption
 
 window = tk.Tk()
 window.title("Server")
 window.iconbitmap('resources/icon.ico')
 SERVER = socket.gethostbyname(socket.gethostname())
+encrypted_ip = encryption.encrypt(SERVER)
+print(SERVER)
+print(encrypted_ip)
+
 
 # Top frame consisting of two buttons widgets (i.e. btnStart, btnStop)
 logse = tk.PhotoImage(file='resources/server.png')
@@ -20,7 +25,7 @@ topFrame.pack(pady=(5, 0))
 
 # Middle frame consisting of two labels for displaying the host and port info
 middleFrame = tk.Frame(window)
-lblHost = tk.Label(middleFrame, text = "IP: X.X.X.X")
+lblHost = tk.Label(middleFrame, text = "Code: Start to get code!")
 lblHost.pack(side=tk.LEFT)
 lblPort = tk.Label(middleFrame, text = "Port:XXXX")
 lblPort.pack(side=tk.LEFT)
@@ -59,7 +64,7 @@ def start_server():
 
     threading._start_new_thread(accept_clients, (server, " "))
 
-    lblHost["text"] = "IP: " + SERVER
+    lblHost["text"] = "Code: " + encrypted_ip
     lblPort["text"] = "Port: " + str(PORT)
 
 # Stop server function
