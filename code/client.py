@@ -15,6 +15,8 @@ SERVER = socket.gethostbyname(socket.gethostname())
 def bob():
     l = miu.get()
     l = encryption.decrypt(str(l))
+    qz = '192.168.'
+    l = qz + l
     global SERVER, PORT, ADDR
     SERVER = l
     print(SERVER)
@@ -28,8 +30,8 @@ fof.pack(pady=(10,5), side=tk.TOP, anchor=N, padx=5)
 secframe = tk.Frame(window)
 kzz= len(f'[{SERVER}] IP:')
 pzz = kzz + 5
-pq = tk.Label(secframe, text=f'[{SERVER}]').pack(side=tk.LEFT)
-sensei = tk.Label(secframe, text = "IP:").pack(side=tk.LEFT)
+
+sensei = tk.Label(secframe, text = "Code:").pack(side=tk.LEFT)
 miu = tk.Entry(secframe)
 miu.pack(side=tk.LEFT)
 tnConnect = tk.Button(secframe, text="Change", command=bob)
@@ -37,8 +39,7 @@ tnConnect.pack(side=tk.LEFT)
 secframe.pack(side=tk.TOP, anchor=N, padx=5)
 
 topFrame = tk.Frame(window)
-
-lblName = tk.Label(topFrame, text = pzz*' '+"Name:").pack(side=tk.LEFT)
+lblName = tk.Label(topFrame, text = "Name:").pack(side=tk.LEFT)
 entName = tk.Entry(topFrame)
 entName.pack(side=tk.LEFT)
 btnConnect = tk.Button(topFrame, text="Connect", command=lambda : connect())

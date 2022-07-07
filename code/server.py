@@ -1,15 +1,16 @@
 import tkinter as tk
-import socket, threading, csv
+import socket, threading
 import encryption
-from datetime import datetime
 
 window = tk.Tk()
 window.title("Server")
 window.iconbitmap('resources/icon.ico')
 SERVER = socket.gethostbyname(socket.gethostname())
-encrypted_ip = encryption.encrypt(SERVER)
-print(SERVER)
-print(encrypted_ip)
+newvar = SERVER.lstrip('192.168.')
+print(newvar)
+encrypted_ip = encryption.encrypt(newvar)
+#print(SERVER)
+#print(encrypted_ip)
 
 
 # Top frame consisting of two buttons widgets (i.e. btnStart, btnStop)
@@ -26,10 +27,10 @@ topFrame.pack(pady=(5, 0))
 
 # Middle frame consisting of two labels for displaying the host and port info
 middleFrame = tk.Frame(window)
-lblHost = tk.Label(middleFrame, text = "Code: Start to get code!")
+lblHost = tk.Label(middleFrame, text = "Code: XXXXX")
 lblHost.pack(side=tk.LEFT)
-lblPort = tk.Label(middleFrame, text = "Port:XXXX")
-lblPort.pack(side=tk.LEFT)
+#lblPort = tk.Label(middleFrame, text = "Port:XXXX")
+#lblPort.pack(side=tk.LEFT)
 middleFrame.pack(side=tk.TOP, pady=(5, 0))
 
 # The client frame shows the client area
@@ -50,9 +51,6 @@ client_name = " "
 clients = []
 clients_names = []
 
-with open('../logfile.csv','a') as logfile:
-    csv.writer().write('Server started at',datetime.now().strftime('%d/%/%Y %H:%M:%S'))
-
 # Start server function
 def start_server():
     global server, ADDR, PORT # code is fine without this
@@ -69,17 +67,15 @@ def start_server():
     threading._start_new_thread(accept_clients, (server, " "))
 
     lblHost["text"] = "Code: " + encrypted_ip
-    lblPort["text"] = "Port: " + str(PORT)
-    with open('logfile.csv','a') as logfile:
-        csv.writer(logfile).write('Server started at',datetime.now().strftime('%d/%/%Y %H:%M:%S'))
+    #lblPort["text"] = "Port: " + str(PORT)
+    print('[ Server Starting ]')
 
 # Stop server function
 def stop_server():
     global server
     btnStart.config(state=tk.NORMAL)
     btnStop.config(state=tk.DISABLED)
-    with open('logfile.csv','a') as logfile:
-        csv.writer(logfile).write('Server stopped at',datetime.now().strftime('%d/%/%Y %H:%M:%S'))
+    print('[ Server Stopping ]')
 
 def accept_clients(the_server, y):
     while True:
